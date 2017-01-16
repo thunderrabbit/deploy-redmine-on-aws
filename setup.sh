@@ -12,6 +12,8 @@ if [ ! -f $AWS_ANSIBLE_DIRECTORY/ec2.ini ];
 then
     cd $AWS_ANSIBLE_DIRECTORY
     curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini > ec2.ini
+    curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py > ec2.py
+    chmod 755 ec2.py
 fi
 
 if [ ! -f $AWS_CREDENTIALS_FILE ];
