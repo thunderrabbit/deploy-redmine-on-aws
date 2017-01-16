@@ -14,6 +14,15 @@ then
     curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini > ec2.ini
     curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py > ec2.py
     chmod 755 ec2.py
+
+    ## git all the things
+    git init
+    git add ec2.py ec2.ini
+    git commit -m "Initial versions of ec2.py and ec2.ini
+
+    as pulled from
+    curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py > ec2.py
+    curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini > ec2.ini"
 fi
 
 if [ ! -f $AWS_CREDENTIALS_FILE ];
