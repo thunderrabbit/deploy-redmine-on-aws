@@ -3,9 +3,13 @@
 AWS_ANSIBLE_DIRECTORY=$HOME/ansible
 AWS_CREDENTIALS_FILE=$AWS_ANSIBLE_DIRECTORY/aws_keys
 
+if [ ! -d $AWS_ANSIBLE_DIRECTORY ];
+then
+    mkdir $AWS_ANSIBLE_DIRECTORY
+fi
+
 if [ ! -f $AWS_CREDENTIALS_FILE ];
 then
-   mkdir $AWS_ANSIBLE_DIRECTORY
    echo "File $AWS_CREDENTIALS_FILE does not exist."
    echo "This file must contain keys to connect to AWS."
    echo "Create new keys here: https://console.aws.amazon.com/iam/home#/users"
