@@ -21,7 +21,11 @@ then
    echo "File $AWS_CREDENTIALS_FILE does not exist."
    echo "This file must contain keys to connect to AWS."
    echo "Create new keys here: https://console.aws.amazon.com/iam/home#/users"
-   echo "I believe the user should have AmazonEC2FullAccess policy attached"
+   echo "The user associated with these keys should have (at least) the following policies"
+   echo
+   echo "* AmazonEC2FullAccess"
+   echo "* AmazonRDSReadOnlyAccess"
+   echo "* AmazonElastiCacheReadOnlyAccess"
    echo
    echo "You can read more about Access Keys at"
    echo "http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html"
