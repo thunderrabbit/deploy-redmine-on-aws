@@ -29,6 +29,10 @@ then
 
     git add ec2.ini
     git commit -m "Speed up requests by targeting just one region."
+
+    echo aws_keys* >> .gitignore
+    git add .gitignore
+    git commit -m "Ignore aws_keys files which will be added to this directory soon."
 fi
 
 if [ ! -f $AWS_CREDENTIALS_FILE ];
