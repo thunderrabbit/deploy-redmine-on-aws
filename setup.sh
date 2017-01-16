@@ -8,6 +8,12 @@ then
     mkdir $AWS_ANSIBLE_DIRECTORY
 fi
 
+if [ ! -f $AWS_ANSIBLE_DIRECTORY/ec2.ini ];
+then
+    cd $AWS_ANSIBLE_DIRECTORY
+    curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini > ec2.ini
+fi
+
 if [ ! -f $AWS_CREDENTIALS_FILE ];
 then
    echo "File $AWS_CREDENTIALS_FILE does not exist."
