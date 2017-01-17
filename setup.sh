@@ -55,4 +55,6 @@ then
    echo "export AWS_SECRET_ACCESS_KEY='$SECRET_ID'" >> $AWS_CREDENTIALS_FILE
    source $AWS_CREDENTIALS_FILE
    echo "Keys have been saved and loaded into Environment vars so we can connect to AWS."
+   echo "Testing connection with ~/ansible/ec2.py --refresh-cache"
+   ~/ansible/ec2.py --refresh-cache
 fi
