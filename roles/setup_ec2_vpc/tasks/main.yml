@@ -1,6 +1,9 @@
 ---
 # tasks file for setup_ec2_vpc
 
+- set_fact:
+     vagrant_machines_ip_address: "{{ lookup('env','LOCAL_IP_ADDRESS') }}"
+
 - name: Create a VPC
   ec2_vpc_net:
     name: "{{ vpc_name_tag }}"
