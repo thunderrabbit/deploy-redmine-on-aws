@@ -14,3 +14,13 @@
 - set_fact:
      newly_created_vpc_id: "{{ vpc_data.vpc.id }}"
 
+- name: Create internet Gateway
+  ec2_vpc_igw:
+    vpc_id: "{{ newly_created_vpc_id }}"
+    region: "{{ region }}"
+    state: present
+  register: igw
+
+- name: "Output contents of Internet Gateway (not needed, but fun)"
+  debug: var=igw
+
