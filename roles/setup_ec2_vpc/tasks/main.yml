@@ -24,3 +24,16 @@
 - name: "Output contents of Internet Gateway (not needed, but fun)"
   debug: var=igw
 
+- name: Create subnet for web server
+  ec2_vpc_subnet:
+    region: "{{ region }}"
+    state: present
+    vpc_id: "{{ newly_created_vpc_id }}"
+    cidr: "{{ vpc_cidr_block }}"
+    resource_tags:
+      Name: Redmine Server Subnet
+  register: subnet_data
+
+- name: "Output contents of subnet (not needed, but fun)"
+  debug: var=subnet_data
+
