@@ -1,2 +1,9 @@
 ---
 # tasks file for setup_ec2_instance
+
+- name: Create ec2 key
+  ec2_key:
+    name: "{{ keypair }}"
+    region: "{{ region }}"
+    key_material: "{{ item }}"
+  with_file: /home/vagrant/.ssh/id_rsa.pub
