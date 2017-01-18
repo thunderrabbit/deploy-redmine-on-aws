@@ -1,0 +1,74 @@
+---
+# tasks file for setup_ec2_vpc
+
+- set_fact:
+     vagrant_machines_ip_address: "{{ lookup('env','LOCAL_IP_ADDRESS') }}"
+
+- name: Create a VPC
+  ec2_vpc_net:
+    name: "{{ vpc_name_tag }}"
+    cidr_block: "{{ vpc_cidr_block }}"
+    region: "{{ region }}"
+    tags:
+      module: "{{ boot_name }} ec2_vpc"
+    tenancy: default
+  register: vpc_data
+
+- set_fact:
+     newly_created_vpc_id: "{{ vpc_data.vpc.id }}"
+
+- name: Create internet Gateway
+  ec2_vpc_igw:
+    vpc_id: "{{ newly_created_vpc_id }}"
+    region: "{{ region }}"
+    state: present
+  register: igw
+
+- name: "Output contents of Internet Gateway (not needed, but fun)"
+  debug: var=igw
+
+- name: Create subnet for web server
+  ec2_vpc_subnet:
+    region: "{{ region }}"
+    state: present
+    vpc_id: "{{ newly_created_vpc_id }}"
+    cidr: "{{ vpc_cidr_block }}"
+    resource_tags:
+      Name: Redmine Server Subnet
+  register: subnet_data
+
+- name: "Output contents of subnet (not needed, but fun)"
+  debug: var=subnet_data
+
+- set_fact:
+     webserver_subnet_id_1: "{{ subnet_data.subnet.id }}"
+
+- name: Set up public subnet route table
+  ec2_vpc_route_table:
+    region: "{{ region }}"
+    vpc_id: "{{ newly_created_vpc_id }}"
+    tags:
+      Name: "{{ vpc_name_tag }} public route table"
+    subnets:
+      - "{{ webserver_subnet_id_1 }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ igw.gateway_id }}"
+  register: public_route_table
+
+- name: "Create a security group which only allows our IP ({{ vagrant_machines_ip_address }}) to connect"
+  ec2_group:
+    region: "{{ region }}"
+    name: "{{ security_group }}"
+    description: "{{ boot_name }} Security Group for Redmine Server on VPC"
+    vpc_id: "{{ newly_created_vpc_id }}"
+    rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: "{{ vagrant_machines_ip_address }}/32"
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+
