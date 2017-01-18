@@ -1,0 +1,16 @@
+---
+  - name: Provision an EC2 Instance
+    hosts: localhost
+    connection: local
+    gather_facts: False
+    tags: provisioning
+
+    # Necessary Variables for creating/provisioning the EC2 Instance
+    vars_files:
+      - vars/vars_for_base_provision.yml
+
+    roles:
+      - setup_ec2_vpc
+      - setup_ec2_instance
+
+
