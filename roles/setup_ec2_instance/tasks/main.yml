@@ -1,0 +1,27 @@
+---
+# tasks file for setup_ec2_instance
+
+- name: Create ec2 key
+  ec2_key:
+    name: "{{ keypair }}"
+    region: "{{ region }}"
+    key_material: "{{ item }}"
+  with_file: /home/vagrant/.ssh/id_rsa.pub
+
+- name: Launch the new EC2 Instance
+  local_action:
+     module: ec2
+     region: "{{ region }}"
+     group: "{{ security_group }}"
+     instance_type: "{{ instance_type}}"
+     image: "{{ image }}"
+     assign_public_ip: yes
+     wait: true
+     keypair: "{{ keypair }}"
+     exact_count: "{{count}}"
+     count_tag: Type
+     instance_tags:
+        Type: "redmine"
+        Name: "{{ boot_name }}"
+     vpc_subnet_id: "{{ webserver_subnet_id_1 }}"
+  register: ec2
