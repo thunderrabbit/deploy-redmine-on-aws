@@ -56,3 +56,19 @@
         gateway_id: "{{ igw.gateway_id }}"
   register: public_route_table
 
+- name: "Create a security group which only allows our IP ({{ vagrant_machines_ip_address }}) to connect"
+  ec2_group:
+    region: "{{ region }}"
+    name: "{{ security_group }}"
+    description: "{{ boot_name }} Security Group for Redmine Server on VPC"
+    vpc_id: "{{ newly_created_vpc_id }}"
+    rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: "{{ vagrant_machines_ip_address }}/32"
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+
