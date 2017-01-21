@@ -1,0 +1,9 @@
+---
+  - name: Set up default website on server
+    hosts: tag_Type_redmine
+    remote_user: ubuntu
+    become: yes
+    gather_facts: yes
+
+    roles:
+      - deploy_default_site

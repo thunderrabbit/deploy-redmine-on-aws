@@ -1,0 +1,35 @@
+---
+- hosts: tag_Type_redmine
+  remote_user: ubuntu
+  tasks:
+    - name: updates the server
+      become: yes
+      apt: update_cache=yes
+
+# https://github.com/ansible/ansible-modules-core/issues/3523
+# have to install aptitude because apt upgrade fails (as of Dec 2016)
+# fix thanks http://blog.swwomm.com/2016/04/xenial-ansible.html
+    - name: install apt requirements
+      become: yes
+      apt: pkg=aptitude
+
+    - name: upgrade the server
+      become: yes
+      apt: upgrade=full
+
+    - name: restart machine, required after upgrade
+      shell: sleep 5 && shutdown -r now "Ansible updates triggered"
+      async: 1
+      poll: 0
+      ignore_errors: true
+      become: true
+
+    - name: Wait for SSH to come up
+      local_action: 
+        module: wait_for
+          host={{ inventory_hostname }}
+          port=22
+          delay=15
+          timeout=100
+          state=started
+      become: false
