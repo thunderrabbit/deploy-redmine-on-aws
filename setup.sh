@@ -25,7 +25,8 @@ then
     curl https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini > ec2.ini"
 
     # Focus on only one region, which seems to make things much faster.
-    sed -i 's/regions = all/regions = us-east-1/' ec2.ini
+    # TODO: make us-west-1 be specified by user when setup.sh is run
+    sed -i 's/regions = all/regions = us-west-1/' ec2.ini
 
     git add ec2.ini
     git commit -m "Speed up requests by targeting just one region."
