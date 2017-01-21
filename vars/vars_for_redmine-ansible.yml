@@ -1,0 +1,31 @@
+# Database name for redmine
+redmine_db_name: redmine
+
+# Mysql user for redmine:
+redmine_db_login: redmine
+
+# Password of redmine_db_login
+redmine_db_passwd: 'must-change-password-before-running-playbook'
+
+# The default admin user that will be set on your redmine installation
+redmine_admin_login: admin
+redmine_admin_passwd: 'must-change-password-before-running-playbook'
+redmine_admin_mail: youradmin@example.com
+
+# Mail that will be set on the from field whend Redmine send notificaitons
+redmine_mail_from: yourmailfrom@example.com
+
+redmine_domain: "redmine.example.com"
+# You could also use a domain set in your inventory file, 
+# ex : redmine_domain: "{{ hostvars[groups['redmine_server'][0]]['red_domain'] }}"
+# will use the red_domain property of the first host defined in a group remdine_server
+
+redmine_databases:
+  - name: "{{ redmine_db_name }}"
+    encoding: utf8
+    collation: utf8_general_ci
+redmine_users:
+  - name: "{{ redmine_db_login }}"
+    host: "localhost"
+    password: "{{ redmine_db_passwd }}"
+    priv: "{{ redmine_db_name }}.*:ALL"
