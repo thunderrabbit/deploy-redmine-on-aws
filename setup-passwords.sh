@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Securing passwords..."
+echo "Securing passwords which we will use in playbooks..."
 
 echo "Changing mysql root password."
 FILE_TO_CHANGE=~/deploy-redmine-on-aws/vars/vars_for_geerling.mysql.yml
