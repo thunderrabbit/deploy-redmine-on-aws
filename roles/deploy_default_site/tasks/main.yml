@@ -1,0 +1,9 @@
+---
+# tasks file for sbstrm.co.jp_site
+
+- name: Empty the Apache index for default website
+  template:
+    src: templates/default_site/empty_index.html
+    dest: /var/www/html/index.html
+    backup: yes
+    mode: 0444
