@@ -3,10 +3,13 @@
     hosts: tag_Type_redmine
     vars_files:
       - vars/vars_for_geerling.mysql.yml
+      - vars/vars_for_redmine-ansible.yml
     remote_user: ubuntu
     become: yes
     gather_facts: yes
 
     roles:
       - role: geerlingguy.mysql
+        become: yes
+      - role: redmine-ansible
         become: yes
