@@ -1,0 +1,12 @@
+---
+  - name: Set up packages we need for PHP sites
+    hosts: tag_Type_redmine
+    remote_user: ubuntu
+    become: yes
+    gather_facts: yes
+
+    roles:
+      - { role: geerlingguy.git }
+      - { role: geerlingguy.apache }
+      - { role: geerlingguy.php }
+      - { role: geerlingguy.apache-php-fpm }
