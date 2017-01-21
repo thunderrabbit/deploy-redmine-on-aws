@@ -1,6 +1,6 @@
 ---
   - name: Prepare base of redmine box
-    hosts: tag_Type_Redmine_on_AWS
+    hosts: tag_Type_redmine
     vars_files:
       - vars/vars_for_geerling.security.yml
     remote_user: ubuntu
