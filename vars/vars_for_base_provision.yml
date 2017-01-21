@@ -2,7 +2,7 @@
 region: us-west-1
 instance_type: t2.micro
 boot_name: "Redmine on AWS"
-image: ami-7790c617
+image: ami-d8bdebb8
 keypair: redmineKeyPair
 count: 1
 
