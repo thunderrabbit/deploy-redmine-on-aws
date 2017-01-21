@@ -1,0 +1,21 @@
+---
+  - name: Prepare base of redmine box
+    hosts: tag_Type_redmine_on_AWS
+    vars_files:
+      - vars/vars_for_geerling.security.yml
+    remote_user: ubuntu
+    become: yes
+    gather_facts: no
+
+    pre_tasks:
+    - name: 'apt-get update'
+      raw: sudo apt-get update
+
+    - name: 'Install python2 only required for Ubuntu 16 which has python3, not (currently) an option for ansible'
+      raw: sudo apt-get -y install python-minimal
+
+    - name: "Gather facts, which wasn't possible before installing python2"
+      setup:
+
+    roles:
+      - { role: geerlingguy.security }
