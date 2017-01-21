@@ -1,0 +1,5 @@
+security_sudoers_passwordless: []
+security_sudoers_passworded: []
+
+# Autoupdate mail settings used on Debian/Ubuntu only.
+security_autoupdate_mail_to: "me@example.com"
