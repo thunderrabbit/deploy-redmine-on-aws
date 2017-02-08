@@ -17,9 +17,6 @@ redmine_admin_mail: "youradmin@{{ redmine_db_name }}"
 # Mail that will be set on the from field whend Redmine send notificaitons
 redmine_mail_from: "yourmailfrom@{{ redmine_db_name }}"
 
-# You could also use a domain set in your inventory file, 
-# ex : redmine_domain: "{{ hostvars[groups['redmine_server'][0]]['red_domain'] }}"
-# will use the red_domain property of the first host defined in a group remdine_server
 
 redmine_databases:
   - name: "{{ redmine_db_name }}"
