@@ -7,3 +7,8 @@
     dest: /var/www/html/index.html
     backup: yes
     mode: 0444
+
+- name: Enable ssl version of site (would be better to put this next to the HTTP version, if it exists)
+  command: a2ensite default-ssl.conf
+  args:
+    creates: /etc/apache2/sites-enabled/default-ssl.conf
