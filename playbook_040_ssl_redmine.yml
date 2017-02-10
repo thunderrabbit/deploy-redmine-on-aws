@@ -1,5 +1,5 @@
 ---
-  - name: Set up ssl on default site
+  - name: Set up ssl on redmine
     hosts: tag_Type_redmine
     vars_files:
       - vars/vars_for_redmine-ansible.yml
