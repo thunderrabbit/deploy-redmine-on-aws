@@ -9,6 +9,9 @@ redmine_db_passwd: 'must-change-password-before-running-playbook'
 
 redmine_domain: "redtest.sbstrm.co.jp"
 
+# Fully qualified domain name is used by SSL role
+ansible_fqdn: "{{ redmine_domain }}"
+
 # The default admin user that will be set on your redmine installation
 redmine_admin_login: admin
 redmine_admin_passwd: 'must-change-password-before-running-playbook'
