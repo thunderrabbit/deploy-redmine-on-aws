@@ -56,7 +56,7 @@
         gateway_id: "{{ igw.gateway_id }}"
   register: public_route_table
 
-- name: "Create a security group which only allows our IP ({{ vagrant_machines_ip_address }}) to connect"
+- name: "Security group ssh locked to our IP ({{ vagrant_machines_ip_address }})"
   ec2_group:
     region: "{{ region }}"
     name: "{{ security_group }}"
@@ -70,5 +70,9 @@
       - proto: tcp
         from_port: 80
         to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 443
+        to_port: 443
         cidr_ip: 0.0.0.0/0
 
