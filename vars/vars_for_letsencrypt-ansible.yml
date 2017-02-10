@@ -1,5 +1,2 @@
 # Fully qualified domain name
-#ansible_fqdn: "{{ redmine_domain }}"
-
-# while testing letsencrypt, lets encrypt just the basic site
 ansible_fqdn: "test.sbstrm.co.jp"
