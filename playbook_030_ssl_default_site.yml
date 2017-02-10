@@ -2,7 +2,6 @@
   - name: Set up ssl on default site
     hosts: tag_Type_redmine
     vars_files:
-      - vars/vars_for_redmine-ansible.yml
       - vars/vars_for_letsencrypt-ansible.yml
     remote_user: ubuntu
     become: yes
