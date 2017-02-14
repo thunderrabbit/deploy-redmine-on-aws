@@ -13,3 +13,5 @@
         become: yes
       - role: redmine-ansible
         become: yes
+      - role: letsencrypt-ansible
+        become: yes
